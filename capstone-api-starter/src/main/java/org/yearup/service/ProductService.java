@@ -55,6 +55,10 @@ public class ProductService
         existing.setSubCategory(product.getSubCategory());
         existing.setFeatured(product.isFeatured());
         existing.setImageUrl(product.getImageUrl());
+
+        //This line fixes the bug that prevents updating the product's stock
+        existing.setStock(product.getStock());
+
         return productRepository.save(existing);
     }
 
