@@ -30,7 +30,7 @@ public class ProductService
                        .toList();
     }
 
-    public List<Product> listByCategoryId(int categoryId)
+    public List<Product> getByCategoryId(int categoryId)
     {
         return productRepository.findByCategoryId(categoryId);
     }
