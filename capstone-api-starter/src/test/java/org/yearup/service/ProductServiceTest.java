@@ -44,4 +44,27 @@ class ProductServiceTest {
 
     }
 
+    @Test
+    void update_shouldUpdateStock(){
+
+        //Arrange
+        Product existing = new Product();
+        existing.setStock(10);
+
+        Product updated = new Product();
+        updated.setStock(20);
+
+        Mockito.when(productRepository.findById(1))
+                .thenReturn(Optional.of(existing));
+
+        Mockito.when(productRepository.save(existing))
+                .thenReturn(existing);
+
+        //Act
+        Product result = productService.update(1, updated);
+
+        //Assert
+        assertEquals(20, result.getStock());
+    }
+
 }
