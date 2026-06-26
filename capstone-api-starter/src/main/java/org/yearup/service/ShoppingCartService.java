@@ -29,14 +29,29 @@ public class ShoppingCartService
         List<CartItem> cartItems = shoppingCartRepository.findByUserId(userId);
         for (CartItem cartItem : cartItems){
             Product product = productService.getById(cartItem.getProductId());
-            ShoppingCartItem shoppingCartItems = new ShoppingCartItem();
-            shoppingCartItems.setProduct(product);
-            shoppingCartItems.setQuantity(cartItem.getQuantity());
-            shoppingCart.add(shoppingCartItems);
+            ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+            shoppingCartItem.setProduct(product);
+            shoppingCartItem.setQuantity(cartItem.getQuantity());
+            shoppingCart.add(shoppingCartItem);
 
         }// load the user's cart rows, look up each product, and build the ShoppingCart
         return shoppingCart;
     }
 
     // add additional methods here
+    public ShoppingCart addProductToCart(int userId, int productId){
+        CartItem cartItem = shoppingCartRepository.findByUserIdAndProductId(userId, productId);
+        if(cartItem == null){
+            CartItem item = new CartItem();
+            item.setProductId(productId);
+            item.setUserId(userId);
+            shoppingCartRepository.save(item);
+        } else {
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
+            shoppingCartRepository.save(cartItem);
+        }
+        return getByUserId(userId);
+    }
+
+
 }
