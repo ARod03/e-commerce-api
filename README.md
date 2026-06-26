@@ -178,6 +178,62 @@ ECommerceApplication → Run
 3. Test with Insomnia
 Use the provided API test suite.
 
+🧩 Interesting Code Snippet
+One of the most interesting parts of this project is how the system adds a product to the shopping cart.
+This method demonstrates:
+
+Database lookup
+
+Conditional logic
+
+Entity creation
+
+Quantity updates
+
+Returning a fully rebuilt cart
+
+Code Snippet: Adding a Product to the Cart
+
+```
+java
+public ShoppingCart addProductToCart(int userId, int productId){
+    CartItem cartItem = shoppingCartRepository.findByUserIdAndProductId(userId, productId);
+
+    if(cartItem == null){
+        CartItem item = new CartItem();
+        item.setProductId(productId);
+        item.setUserId(userId);
+        shoppingCartRepository.save(item);
+    } else {
+        cartItem.setQuantity(cartItem.getQuantity() + 1);
+        shoppingCartRepository.save(cartItem);
+    }
+
+    return getByUserId(userId);
+}
+```
+Why This Code Is Interesting
+
+It handles both scenarios:
+
+The product is not yet in the cart → create a new row
+
+The product already exists → increment quantity
+
+It uses the repository to save changes immediately.
+
+It returns a fully rebuilt ShoppingCart, which includes:
+
+Product details
+
+Quantities
+
+Line totals
+
+Cart total
+
+This method is a great example of how the service layer coordinates between the database and the in‑memory cart model to produce a clean, frontend‑ready response.
+
 🔮 Future Enhancements
 The next planned features include:
 
