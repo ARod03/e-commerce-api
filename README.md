@@ -98,6 +98,7 @@ Tools	IntelliJ IDEA, Insomnia
 
 
 📁 Project Structure
+```
 Code
 src/main/java/org/yearup/
 │
@@ -128,6 +129,7 @@ src/main/java/org/yearup/
     ├── JwtRequestFilter
     ├── JwtTokenUtil
     └── SecurityConfig
+```
 
     
 🧪 Testing With Insomnia
