@@ -1,5 +1,6 @@
 package org.yearup.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,11 @@ public class ShoppingCartController
     // a shopping cart controller depends on the service layer
     private ShoppingCartService shoppingCartService;
     private UserService userService;
+
+    public ShoppingCartController(ShoppingCartService shoppingCartService,UserService userService){
+        this.shoppingCartService = shoppingCartService;
+        this.userService = userService;
+    }
 
 
 
