@@ -10,6 +10,7 @@ import org.yearup.models.Product;
 import org.yearup.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +41,6 @@ class ProductServiceTest {
         //Assert
         assertEquals(1, results.size());
         assertTrue(results.contains(notFeatured));
-
 
     }
 
